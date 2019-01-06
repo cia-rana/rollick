@@ -10,6 +10,12 @@ var index = `
 <body>
 <script>
 window.onload = function() {
+	let echoRender = function(e) {
+		if (!e.children[0].getAttributeNode("src")) {
+			echo.render();
+		}
+	}
+
 	echo.init();
 
 	let images = document.getElementsByClassName("image")
@@ -30,11 +36,13 @@ window.onload = function() {
 			images[pos].style.display = "none";
 			pos = (pos - 1 + imageLen) % imageLen;
 			images[pos].style.display = "block";
+			echoRender(images[pos]);
 			break;
 		case "ArrowRight":
 			images[pos].style.display = "none";
 			pos = (pos + 1) % imageLen;
 			images[pos].style.display = "block";
+			echoRender(images[pos]);
 			break;
 		}
 	}
